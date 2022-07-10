@@ -6,7 +6,7 @@ import lombok.*;
 import static com.dokuny.mini_campus.admin.repository.cond.MemberSearchCondition.*;
 
 @Data
-public class MemberSearchRequest {
+public class MemberSearchInput {
     private String searchType;
     private String searchValue;
 

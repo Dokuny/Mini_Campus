@@ -29,6 +29,11 @@ public class Pagination {
         totalPages = page.getTotalPages();
         first = page.isFirst();
         last = page.isLast();
+
+        if (page.getTotalPages() == 0) {
+            end=1;
+        }
+
     }
 
 

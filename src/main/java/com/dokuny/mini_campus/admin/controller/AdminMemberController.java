@@ -3,12 +3,11 @@ package com.dokuny.mini_campus.admin.controller;
 
 import com.dokuny.mini_campus.admin.dto.MemberDetailDto;
 import com.dokuny.mini_campus.admin.dto.MemberListDto;
-import com.dokuny.mini_campus.admin.dto.MemberSearchRequest;
+import com.dokuny.mini_campus.admin.dto.MemberSearchInput;
 import com.dokuny.mini_campus.admin.service.AdminMemberService;
 import com.dokuny.mini_campus.commons.dto.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -24,9 +23,9 @@ public class AdminMemberController {
     private final AdminMemberService adminMemberService;
 
     @GetMapping({"/admin/member/list.do"})
-    public String memberSearch(Model model, MemberSearchRequest request,
+    public String memberSearch(Model model, MemberSearchInput input,
                                @PageableDefault(size = 10, page = 0) Pageable pageable) {
-        Page<MemberListDto> page = adminMemberService.searchMembers(request, pageable);
+        Page<MemberListDto> page = adminMemberService.searchMembers(input, pageable);
         model.addAttribute("page", new Pagination(page));
         model.addAttribute("members", page.getContent());
         return "admin/member/list";

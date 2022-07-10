@@ -2,7 +2,7 @@ package com.dokuny.mini_campus.admin.service.impl;
 
 import com.dokuny.mini_campus.admin.dto.MemberDetailDto;
 import com.dokuny.mini_campus.admin.dto.MemberListDto;
-import com.dokuny.mini_campus.admin.dto.MemberSearchRequest;
+import com.dokuny.mini_campus.admin.dto.MemberSearchInput;
 import com.dokuny.mini_campus.admin.repository.AdminMemberRepository;
 import com.dokuny.mini_campus.admin.service.AdminMemberService;
 import com.dokuny.mini_campus.member.entity.Member;
@@ -24,7 +24,7 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<MemberListDto> searchMembers(MemberSearchRequest request, Pageable pageable) {
+    public Page<MemberListDto> searchMembers(MemberSearchInput request, Pageable pageable) {
         return adminMemberRepository.searchMembers(request.getSearchCondition(), pageable);
     }
 

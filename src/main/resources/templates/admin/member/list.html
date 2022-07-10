@@ -44,7 +44,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="member : ${members}">
-						<th scope="row" th:text="${memberStat.count+ 10*page.curNum}">Default</th>
+						<th scope="row" th:text="${memberStat.count+ 10 * page.curNum}">Default</th>
 						<td><a th:href="@{/admin/member/detail.do(id=${member.id})}" th:text="${member.id}"> 이메일 </a></td>
 						<td th:text="${member.name}">이름</td>
 						<td th:text="${member.phone}">연락처</td>
