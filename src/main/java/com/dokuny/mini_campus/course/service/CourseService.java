@@ -16,4 +16,6 @@ public interface CourseService {
     CourseDto find(Long id);
 
     boolean edit(CourseInput input);
+
+    boolean delete(String idList);
 }

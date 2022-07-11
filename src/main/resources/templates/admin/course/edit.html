@@ -4,12 +4,28 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{commons/admin_layout}">
 	
+	<head>
+		<script>
+			$(document).ready(function () {
+				$('form.edit').on('submit', function () {
+					if (!confirm('강의를 수정하시겠습니까?')) {
+						return false;
+					}
+					oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+				})
+				
+			})
+		</script>
+	</head>
+	
+	
+	
 	<th:block layout:fragment="content">
 		<div class="container-fluid">
 			<h1>강의 등록</h1>
 		</div>
 		<div class="container-fluid">
-			<form method="post">
+			<form class="edit" method="post">
 				<fieldset>
 					<input type="hidden" th:value="${course.id}" name="id">
 					<div class="form-group">
@@ -42,10 +58,9 @@
 					</div>
 					<div class="form-group">
 						<label for="contents" class="form-label mt-4">내용</label>
-						<input type="text" class="form-control" name="contents" id="contents" placeholder="내용 입력"
-						       th:value="${course.contents}"
-						       required>
+						<textarea id="contents" name="contents" rows="20" style="width: 100%" th:text="${course.contents}"></textarea>
 					</div>
+					
 					<div class="form-group">
 						<label for="price" class="form-label mt-4">정가</label>
 						<input type="number" class="form-control" name="price" id="price" placeholder="정가 입력"
@@ -71,10 +86,20 @@
 				</fieldset>
 				
 				<div style="text-align: center;margin-top: 10px">
-					<button type="submit" class="btn btn-primary">수정하기</button>
+					<button type="submit" class="btn btn-primary edit-btn" >수정하기</button>
 				</div>
 			</form>
 		</div>
+		<script type="text/javascript" src="/res/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var oEditors = [];
+			nhn.husky.EZCreator.createInIFrame({
+				oAppRef: oEditors,
+				elPlaceHolder: "contents",
+				sSkinURI: "/res/se2/SmartEditor2Skin.html",
+				fCreator: "createSEditor2",
+			});
+		</script>
 	</th:block>
 
 

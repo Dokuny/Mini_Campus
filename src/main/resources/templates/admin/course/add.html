@@ -3,14 +3,22 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{commons/admin_layout}">
+	<head>
+		<script>
+			$(document).ready(function () {
+				$('#submitForm').on('submit', function () {
+					oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+				});
+			});
+		</script>
+	</head>
 	
-
 	<th:block layout:fragment="content">
 		<div class="container-fluid">
 			<h1>강의 등록</h1>
 		</div>
 		<div class="container-fluid">
-			<form method="post">
+			<form method="post" id="submitForm">
 				<fieldset>
 					<div class="form-group">
 						<label for="category" class="form-label mt-4">카테고리</label>
@@ -33,13 +41,14 @@
 					</div>
 					<div class="form-group">
 						<label for="summary" class="form-label mt-4">요약 문구</label>
-						<textarea class="form-control" id="summary" name="summary" rows="3" placeholder="요약문구 입력" required></textarea>
+						<textarea class="form-control" id="summary" name="summary" rows="3" placeholder="요약문구 입력"
+						          required></textarea>
 					</div>
 					<div class="form-group">
 						<label for="contents" class="form-label mt-4">내용</label>
-						<input type="text" class="form-control" name="contents" id="contents" placeholder="내용 입력"
-						       required>
+						<textarea id="contents" name="contents" rows="20" style="width: 100%"></textarea>
 					</div>
+					
 					<div class="form-group">
 						<label for="price" class="form-label mt-4">정가</label>
 						<input type="text" class="form-control" name="price" id="price" placeholder="정가 입력"
@@ -52,7 +61,8 @@
 					</div>
 					<div class="form-group">
 						<label for="saleEndAt" class="form-label mt-4">할인 종료일</label>
-						<input type="datetime-local" class="form-control" name="saleEndAt" id="saleEndAt" placeholder="할인 종료일 입력"
+						<input type="datetime-local" class="form-control" name="saleEndAt" id="saleEndAt"
+						       placeholder="할인 종료일 입력"
 						       required>
 					</div>
 				</fieldset>
@@ -62,6 +72,16 @@
 				</div>
 			</form>
 		</div>
+		<script type="text/javascript" src="/res/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var oEditors = [];
+			nhn.husky.EZCreator.createInIFrame({
+				oAppRef: oEditors,
+				elPlaceHolder: "contents",
+				sSkinURI: "/res/se2/SmartEditor2Skin.html",
+				fCreator: "createSEditor2",
+			});
+		</script>
 	</th:block>
 
 

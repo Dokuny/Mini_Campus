@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class AdminCourseController {
@@ -77,5 +79,12 @@ public class AdminCourseController {
         return "redirect:/admin/course/list.do";
     }
 
+    @PostMapping("/admin/course/delete.do")
+    public String delete(@RequestParam("idList") String idList) {
+
+        courseService.delete(idList);
+
+        return "redirect:/admin/course/list.do";
+    }
 
 }
