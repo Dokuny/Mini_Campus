@@ -13,17 +13,17 @@
 			<div style="float: right; margin-bottom: 5px">
 				<form class="d-flex" style="width: 600px">
 					<select class="form-select" name="searchType" style="width: 30%;">
-						<option th:selected="${#strings.equals(memberSearchRequest.searchType,'email')}" value="email">
+						<option th:selected="${#strings.equals(searchInput.searchType,'email')}" value="email">
 							이메일
 						</option>
-						<option th:selected="${#strings.equals(memberSearchRequest.searchType,'name')}" value="name">
+						<option th:selected="${#strings.equals(searchInput.searchType,'name')}" value="name">
 							이름
 						</option>
-						<option th:selected="${#strings.equals(memberSearchRequest.searchType,'phone')}" value="phone">
+						<option th:selected="${#strings.equals(searchInput.searchType,'phone')}" value="phone">
 							연락처
 						</option>
 					</select>
-					<input class="form-control me-sm-2" type="search" th:value="${memberSearchRequest.searchValue}"
+					<input class="form-control me-sm-2" type="search" th:value="${searchInput.searchValue}"
 					       name="searchValue" placeholder="Search">
 					<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="width: 90px;">검색</button>
 				
@@ -58,25 +58,25 @@
 		<div class="container-fluid">
 			<ul class="pagination" style="width: 100%; justify-content: center">
 					<li class="page-item">
-						<a class="page-link" th:href="@{/admin/member/list.do(page=0 ,searchType=${memberSearchRequest.searchType},searchVaue=${memberSearchRequest.searchValue})}">&laquo;</a>
+						<a class="page-link" th:href="@{/admin/member/list.do(page=0 ,searchType=${searchInput.searchType},searchVaue=${searchInput.searchValue})}">&laquo;</a>
 					</li>
 					<li class="page-item" th:classappend="${page.first} ? 'disabled'">
-						<a class="page-link" th:href="${page.first} ? '#' : @{/admin/member/list.do(page=${page.curNum}-1 ,searchType=${memberSearchRequest.searchType},searchVaue=${memberSearchRequest.searchValue})}">&lt;</a>
+						<a class="page-link" th:href="${page.first} ? '#' : @{/admin/member/list.do(page=${page.curNum}-1 ,searchType=${searchInput.searchType},searchVaue=${searchInput.searchValue})}">&lt;</a>
 					</li>
 					
 					<li class="page-item" th:each="index : ${#numbers.sequence(page.start,page.end)}"
 					    th:classappend="${index == (page.curNum + 1)} ? 'active'">
 						<a class="page-link" th:text="${index}"
 						   th:href="@{/admin/member/list.do(page=${index}-1
-						,searchType=${memberSearchRequest.searchType}
-						,searchValue=${memberSearchRequest.searchValue})}">index</a>
+						,searchType=${searchInput.searchType}
+						,searchValue=${searchInput.searchValue})}">index</a>
 					</li>
 					
 					<li class="page-item" th:classappend="${page.last} ? 'disabled'">
-						<a class="page-link" th:href="${page.last} ? '#' : @{/admin/member/list.do(page=${page.curNum}+1 ,searchType=${memberSearchRequest.searchType},searchVaue=${memberSearchRequest.searchValue})}">&gt;</a>
+						<a class="page-link" th:href="${page.last} ? '#' : @{/admin/member/list.do(page=${page.curNum}+1 ,searchType=${searchInput.searchType},searchVaue=${searchInput.searchValue})}">&gt;</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" th:href="@{/admin/member/list.do(page=${page.totalPages}-1 ,searchType=${memberSearchRequest.searchType},searchVaue=${memberSearchRequest.searchValue})}">&raquo;</a>
+						<a class="page-link" th:href="@{/admin/member/list.do(page=${page.totalPages}-1 ,searchType=${searchInput.searchType},searchVaue=${searchInput.searchValue})}">&raquo;</a>
 					</li>
 			
 			</ul>
