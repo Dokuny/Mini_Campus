@@ -4,7 +4,7 @@ import com.dokuny.mini_campus.admin.entity.Category;
 import com.dokuny.mini_campus.admin.exception.CategoryNotExistException;
 import com.dokuny.mini_campus.admin.repository.CategoryRepository;
 import com.dokuny.mini_campus.commons.dto.SearchInput;
-import com.dokuny.mini_campus.course.dto.CourseAddInput;
+import com.dokuny.mini_campus.course.dto.CourseInput;
 import com.dokuny.mini_campus.course.dto.CourseDto;
 import com.dokuny.mini_campus.course.dto.CourseListDto;
 import com.dokuny.mini_campus.course.entity.Course;
@@ -29,7 +29,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Transactional
     @Override
-    public boolean add(CourseAddInput input) {
+    public boolean add(CourseInput input) {
 
         Category category = categoryRepository.findById(input.getCategoryId())
                 .orElseThrow(() -> new CategoryNotExistException("존재하지 않는 카테고리입니다."));
@@ -38,13 +38,13 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.save(Course.builder()
                 .subject(input.getSubject())
                 .category(category)
-                        .contents(input.getContents())
-                        .imagePath(input.getImagePath())
-                        .price(input.getPrice())
-                        .salePrice(input.getSalePrice())
-                        .saleEndAt(LocalDateTime.parse(input.getSaleEndAt()))
-                        .keyword(input.getKeyword())
-                        .summary(input.getSummary())
+                .contents(input.getContents())
+                .imagePath(input.getImagePath())
+                .price(input.getPrice())
+                .salePrice(input.getSalePrice())
+                .saleEndAt(LocalDateTime.parse(input.getSaleEndAt()))
+                .keyword(input.getKeyword())
+                .summary(input.getSummary())
                 .build());
 
         return true;
@@ -63,4 +63,28 @@ public class CourseServiceImpl implements CourseService {
                 .orElseThrow(() -> new CourseNotExistException("존재하지 않는 강의입니다."));
         return CourseDto.of(course);
     }
+
+    @Transactional
+    @Override
+    public boolean edit(CourseInput input) {
+        Course course = courseRepository.findById(input.getId())
+                .orElseThrow(() -> new CourseNotExistException("존재하지 않는 강의입니다."));
+
+        Category category = categoryRepository.findById(input.getCategoryId())
+                .orElseThrow(() -> new CategoryNotExistException("존재하지 않는 카테고리입니다."));
+
+        course.setCategory(category);
+        course.setImagePath(input.getImagePath());
+        course.setKeyword(input.getKeyword());
+        course.setSubject(input.getSubject());
+        course.setSummary(input.getSummary());
+        course.setContents(input.getContents());
+        course.setPrice(input.getPrice());
+        course.setSalePrice(input.getSalePrice());
+        course.setSaleEndAt(LocalDateTime.parse(input.getSaleEndAt()));
+
+        return true;
+    }
+
+
 }

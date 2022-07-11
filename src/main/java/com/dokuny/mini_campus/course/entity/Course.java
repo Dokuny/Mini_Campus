@@ -2,10 +2,7 @@ package com.dokuny.mini_campus.course.entity;
 
 import com.dokuny.mini_campus.admin.entity.Category;
 import com.dokuny.mini_campus.commons.entity.BaseTimeEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 @Entity
 public class Course extends BaseTimeEntity {
 

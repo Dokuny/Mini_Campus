@@ -46,7 +46,7 @@ public class CourseSearchRepositoryImpl implements CourseSearchRepository {
                 .join(course.category,category)
                 .where(subjectContains(cond.getSubject()),
                         categoryContains(cond.getCategoryName()))
-                .orderBy(course.id.asc())
+                .orderBy(course.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();

@@ -1,13 +1,12 @@
 package com.dokuny.mini_campus.course.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
-public class CourseAddInput {
+public class CourseInput {
 
+
+    private long id;
     private long categoryId;
 
     private String imagePath;

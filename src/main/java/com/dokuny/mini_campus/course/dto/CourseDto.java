@@ -12,7 +12,9 @@ public class CourseDto {
 
     private Long id;
 
-    private Long categoryId;
+    private String categoryName;
+
+    private long categoryId;
 
     private String imagePath;
 
@@ -30,10 +32,6 @@ public class CourseDto {
 
     private LocalDateTime saleEndAt;
 
-    private LocalDateTime registeredAt;
-    private LocalDateTime updatedAt;
-
-
     public static CourseDto of(Course course) {
 
         return CourseDto.builder()
@@ -46,8 +44,9 @@ public class CourseDto {
                 .price(course.getPrice())
                 .salePrice(course.getSalePrice())
                 .saleEndAt(course.getSaleEndAt())
-                .registeredAt(course.getCreatedAt())
-                .updatedAt(course.getUpdatedAt())
+                .categoryName(course.getCategory().getName())
                 .build();
     }
+
+
 }
