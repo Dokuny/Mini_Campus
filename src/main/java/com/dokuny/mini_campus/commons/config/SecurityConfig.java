@@ -27,7 +27,6 @@ public class SecurityConfig {
 
         http.authorizeRequests()
                 .antMatchers(
-
                         "/member/login",
                         "/member/register/**",
                         "/member/find/**",
