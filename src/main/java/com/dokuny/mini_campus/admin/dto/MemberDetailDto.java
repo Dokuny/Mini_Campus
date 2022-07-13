@@ -16,6 +16,10 @@ public class MemberDetailDto {
     private LocalDateTime registeredAt;
     private String role;
     private String status;
+    private String zipcode;
+    private String addr;
+    private String addrDetail;
+
 
 
     public static MemberDetailDto of(Member member) {
@@ -26,6 +30,9 @@ public class MemberDetailDto {
                 .registeredAt(member.getCreatedAt())
                 .role(member.getRole().name())
                 .status(member.getStatus().name())
+                .zipcode(member.getZipcode())
+                .addr(member.getAddr())
+                .addrDetail(member.getAddrDetail())
                 .build();
     }
 

@@ -34,6 +34,15 @@
 						</ul>
 						<div class="d-flex">
 							<ul class="navbar-nav me-auto">
+								<li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+									<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">내 정보</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="/member/info">내 정보 관리</a>
+										<a class="dropdown-item" href="/member/course">내 수강 목록</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#">Separated link</a>
+									</div>
+								</li>
 								<li sec:authorize="isAuthenticated()" class="nav-item" >
 									<a class="nav-link" href="/member/logout">로그아웃</a>
 								</li>

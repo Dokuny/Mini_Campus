@@ -1,5 +1,6 @@
 package com.dokuny.mini_campus.member.entity;
 
+import com.dokuny.mini_campus.admin.dto.MemberInfoDto;
 import com.dokuny.mini_campus.admin.dto.MemberListDto;
 import com.dokuny.mini_campus.commons.entity.BaseTimeEntity;
 import com.dokuny.mini_campus.commons.role.Role;
@@ -41,6 +42,10 @@ public class Member extends BaseTimeEntity implements Persistable<String> {
     @Column(name = "status")
     private MemberStatus status;
 
+    private String zipcode;
+    private String addr;
+    private String addrDetail;
+
     public void changePassword(String password) {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
@@ -54,6 +59,15 @@ public class Member extends BaseTimeEntity implements Persistable<String> {
     public void setMemberAuth(MemberAuth memberAuth) {
         this.memberAuth = memberAuth;
         memberAuth.setMember(this);
+    }
+
+    public void updateInfo(String password,String phone,String name,String zipcode,String addr,String addrDetail) {
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.phone = phone;
+        this.name = name;
+        this.zipcode = zipcode;
+        this.addr =addr;
+        this.addrDetail =addrDetail;
     }
 
     public void changeStatus(MemberStatus status) {

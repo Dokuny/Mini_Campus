@@ -1,11 +1,13 @@
 package com.dokuny.mini_campus.member.service.impl;
 
+import com.dokuny.mini_campus.admin.dto.MemberInfoDto;
 import com.dokuny.mini_campus.commons.component.MailComponent;
 
 import com.dokuny.mini_campus.member.dto.MemberRegisterRequest;
 import com.dokuny.mini_campus.member.entity.MemberAuth;
 import com.dokuny.mini_campus.member.entity.Member;
 import com.dokuny.mini_campus.member.exception.MemberAuthException;
+import com.dokuny.mini_campus.member.exception.MemberNotExistException;
 import com.dokuny.mini_campus.member.exception.MemberRegisterException;
 import com.dokuny.mini_campus.member.repository.MemberAuthRepository;
 import com.dokuny.mini_campus.member.repository.MemberRepository;
@@ -114,6 +116,32 @@ public class MemberServiceImpl implements MemberService {
 
         auth.getMember().changePassword(password);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public MemberInfoDto info(String memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotExistException("존재하지 않는 회원입니다."));
+
+        return MemberInfoDto.of(member);
+    }
+
+    @Transactional
+    @Override
+    public boolean updateInfo(MemberInfoDto infoDto) {
+        Member member = memberRepository.findById(infoDto.getId())
+                .orElseThrow(() -> new MemberNotExistException("존재하지 않는 회원입니다."));
+
+        member.updateInfo(infoDto.getPassword(),
+                infoDto.getPhone(),
+                infoDto.getName(),
+                infoDto.getZipcode(),
+                infoDto.getAddr(),
+                infoDto.getAddrDetail());
+
+        return false;
+    }
+
 
     @Transactional(readOnly = true)
     @Override

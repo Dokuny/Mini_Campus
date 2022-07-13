@@ -1,5 +1,6 @@
 package com.dokuny.mini_campus.member.controller;
 
+import com.dokuny.mini_campus.admin.dto.MemberInfoDto;
 import com.dokuny.mini_campus.member.dto.FindPasswordRequest;
 import com.dokuny.mini_campus.member.dto.MemberRegisterRequest;
 import com.dokuny.mini_campus.member.dto.ResetPasswordRequest;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 
 @RequiredArgsConstructor
@@ -67,7 +69,7 @@ public class MemberController {
     }
 
     @PostMapping("/reset/password")
-    public String resetPasswordSubmit(Model model,@Valid @ModelAttribute("request") ResetPasswordRequest request,BindingResult bindingResult) {
+    public String resetPasswordSubmit(Model model, @Valid @ModelAttribute("request") ResetPasswordRequest request, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("passwordKey", request.getPasswordKey());
             return "member/reset_password";
@@ -76,5 +78,26 @@ public class MemberController {
         memberService.resetPassword(request.getPasswordKey(), request.getPassword());
 
         return "member/reset_password_result";
+    }
+
+    @GetMapping("/info")
+    public String memberInfo(Model model,Principal principal) {
+
+        String memberId = principal.getName();
+
+        MemberInfoDto info = memberService.info(memberId);
+
+        model.addAttribute("info", info);
+
+        return "member/info";
+    }
+    @PostMapping("/edit")
+    public String memberInfoEdit(Model model,@ModelAttribute("info") @Valid MemberInfoDto info,Principal principal) {
+
+        info.setId(principal.getName());
+
+        memberService.updateInfo(info);
+
+        return "redirect:/member/info";
     }
 }
