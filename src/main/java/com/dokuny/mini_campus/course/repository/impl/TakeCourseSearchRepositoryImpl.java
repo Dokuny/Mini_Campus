@@ -21,6 +21,7 @@ import java.util.List;
 import static com.dokuny.mini_campus.course.entity.QCourse.course;
 import static com.dokuny.mini_campus.course.entity.QTakeCourse.*;
 import static com.dokuny.mini_campus.member.entity.QMember.*;
+import static org.springframework.util.StringUtils.hasText;
 
 @Repository
 public class TakeCourseSearchRepositoryImpl implements TakeCourseSearchRepository {
@@ -45,7 +46,7 @@ public class TakeCourseSearchRepositoryImpl implements TakeCourseSearchRepositor
                 .from(takeCourse)
                 .join(takeCourse.member, member)
                 .join(takeCourse.course, course)
-                .where(statusEq(cond.getStatus()))
+                .where(statusEq(cond.getStatus()),memberIdEq(cond.getMemberId()))
                 .orderBy(takeCourse.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -62,6 +63,10 @@ public class TakeCourseSearchRepositoryImpl implements TakeCourseSearchRepositor
 
     private BooleanExpression statusEq(TakeCourseStatus status) {
         return status != null ? takeCourse.status.eq(status) : null;
+    }
+
+    private BooleanExpression memberIdEq(String memberId) {
+        return hasText(memberId) ? member.id.eq(memberId) : null;
     }
 
 

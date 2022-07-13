@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import static org.springframework.util.StringUtils.hasText;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -14,15 +16,25 @@ import lombok.NoArgsConstructor;
 public class TakeCourseSearchCondition {
 
     private TakeCourseStatus status;
+    private String memberId;
 
     public static TakeCourseSearchCondition of(SearchInput input) {
         TakeCourseSearchConditionBuilder builder = TakeCourseSearchCondition.builder();
 
         if (input.getSearchType() == null) {
-        } else{
+        } else {
             builder.status(TakeCourseStatus.valueOf(input.getSearchType()));
         };
 
+        return builder.build();
+    }
+
+    public static TakeCourseSearchCondition of(String memberId) {
+        TakeCourseSearchConditionBuilder builder = TakeCourseSearchCondition.builder();
+
+        if (hasText(memberId)) {
+            builder.memberId(memberId);
+        }
         return builder.build();
     }
 }

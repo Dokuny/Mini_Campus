@@ -1,11 +1,18 @@
 package com.dokuny.mini_campus.member.controller;
 
 import com.dokuny.mini_campus.admin.dto.MemberInfoDto;
+import com.dokuny.mini_campus.commons.dto.Pagination;
+import com.dokuny.mini_campus.commons.dto.SearchInput;
+import com.dokuny.mini_campus.course.dto.TakeCourseDto;
+import com.dokuny.mini_campus.course.service.TakeCourseService;
 import com.dokuny.mini_campus.member.dto.FindPasswordRequest;
 import com.dokuny.mini_campus.member.dto.MemberRegisterRequest;
 import com.dokuny.mini_campus.member.dto.ResetPasswordRequest;
 import com.dokuny.mini_campus.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +28,7 @@ import java.security.Principal;
 public class MemberController {
 
     private final MemberService memberService;
+    private final TakeCourseService takeCourseService;
 
     @GetMapping("/register")
     public String registerForm(Model model) {
@@ -81,7 +89,7 @@ public class MemberController {
     }
 
     @GetMapping("/info")
-    public String memberInfo(Model model,Principal principal) {
+    public String memberInfo(Model model, Principal principal) {
 
         String memberId = principal.getName();
 
@@ -91,13 +99,25 @@ public class MemberController {
 
         return "member/info";
     }
+
     @PostMapping("/edit")
-    public String memberInfoEdit(Model model,@ModelAttribute("info") @Valid MemberInfoDto info,Principal principal) {
+    public String memberInfoEdit(Model model, @ModelAttribute("info") @Valid MemberInfoDto info, Principal principal) {
 
         info.setId(principal.getName());
 
         memberService.updateInfo(info);
 
         return "redirect:/member/info";
+    }
+
+    @GetMapping("/takecourse")
+    public String memberTakeCourse(Model model, SearchInput input, @PageableDefault(size = 10, page = 0) Pageable pageable,Principal principal) {
+
+        Page<TakeCourseDto> page = takeCourseService.getMyCourses(principal.getName(), pageable);
+        model.addAttribute("list",
+                page.getContent());
+        model.addAttribute("page", new Pagination(page));
+
+        return "member/takecourse";
     }
 }
