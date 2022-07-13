@@ -34,6 +34,15 @@
 					$('#editBtn').css('display', 'none');
 				});
 				
+				$('#withdrawalBtn').on('click', function () {
+					
+					if (!confirm('정말로 탈퇴하시겠습니까?')) {
+						return false;
+					}
+					
+					location.href='/member/withdrawal'
+				});
+				
 			});
 		</script>
 	</head>
@@ -88,6 +97,8 @@
 							</div>
 						</div>
 						<div>
+							<button id="withdrawalBtn" class="btn btn-danger my-2 my-sm-0" type="button">회원탈퇴</button>
+							
 							<button id="editBtn" class="btn btn-secondary my-2 my-sm-0" type="button">회원정보 수정</button>
 							<button id="submitBtn" style="display: none" class="btn btn-primary my-2 my-sm-0"
 							        type="submit">저장

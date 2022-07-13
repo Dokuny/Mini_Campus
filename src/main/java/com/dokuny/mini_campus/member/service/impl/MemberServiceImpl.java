@@ -142,6 +142,16 @@ public class MemberServiceImpl implements MemberService {
         return false;
     }
 
+    @Transactional
+    @Override
+    public boolean withdrawal(String memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotExistException("존재하지 않는 회원입니다."));
+
+        member.changeStatus(MemberStatus.WITHDRAWAL);
+        return true;
+    }
+
 
     @Transactional(readOnly = true)
     @Override

@@ -111,7 +111,7 @@ public class MemberController {
     }
 
     @GetMapping("/takecourse")
-    public String memberTakeCourse(Model model, SearchInput input, @PageableDefault(size = 10, page = 0) Pageable pageable,Principal principal) {
+    public String memberTakeCourse(Model model, SearchInput input, @PageableDefault(size = 10, page = 0) Pageable pageable, Principal principal) {
 
         Page<TakeCourseDto> page = takeCourseService.getMyCourses(principal.getName(), pageable);
         model.addAttribute("list",
@@ -119,5 +119,11 @@ public class MemberController {
         model.addAttribute("page", new Pagination(page));
 
         return "member/takecourse";
+    }
+
+    @GetMapping("/withdrawal")
+    public String memberWithdrawal(Principal principal) {
+        memberService.withdrawal(principal.getName());
+        return "redirect:/member/logout";
     }
 }

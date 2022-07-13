@@ -21,4 +21,5 @@ public interface MemberService extends UserDetailsService {
     boolean updateInfo(MemberInfoDto infoDto);
 
 
+    boolean withdrawal(String memberId);
 }
