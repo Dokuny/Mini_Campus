@@ -32,10 +32,12 @@ public class AdminMemberController {
     }
 
     @GetMapping("/admin/member/detail.do")
-    public String memberDetail(Model model, @RequestParam("id") String email) {
+    public String memberDetail(Model model, @RequestParam("id") String email,  @PageableDefault(size = 10, page = 0) Pageable pageable) {
+        MemberDetailDto dto = adminMemberService.getMemberDetail(email, pageable);
 
-        model.addAttribute("memberDetail"
-                , adminMemberService.getMemberDetail(email));
+        model.addAttribute("memberDetail", dto);
+        model.addAttribute("page", new Pagination(dto.getLoginHistories()));
+
         return "admin/member/member_detail";
     }
 

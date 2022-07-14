@@ -11,7 +11,7 @@ public interface AdminMemberService {
 
     Page<MemberListDto> searchMembers(SearchInput input, Pageable pageable);
 
-    MemberDetailDto getMemberDetail(String id);
+    MemberDetailDto getMemberDetail(String id,Pageable pageable);
 
     void editMemberDetail(MemberDetailDto dto);
 }
