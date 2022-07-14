@@ -36,6 +36,7 @@ public class CourseDto {
 
     private LocalDateTime saleEndAt;
 
+
     public static CourseDto of(Course course) {
 
         return CourseDto.builder()

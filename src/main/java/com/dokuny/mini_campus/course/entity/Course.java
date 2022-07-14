@@ -2,10 +2,12 @@ package com.dokuny.mini_campus.course.entity;
 
 import com.dokuny.mini_campus.admin.entity.Category;
 import com.dokuny.mini_campus.commons.entity.BaseTimeEntity;
+import com.dokuny.mini_campus.commons.entity.FileUpload;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

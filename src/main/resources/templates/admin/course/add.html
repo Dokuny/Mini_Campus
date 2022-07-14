@@ -11,6 +11,7 @@
 				});
 			});
 		</script>
+		<script type="text/javascript" src="/res/ckeditor/ckeditor.js"></script>
 	</head>
 	
 	<th:block layout:fragment="content">
@@ -18,7 +19,7 @@
 			<h1>강의 등록</h1>
 		</div>
 		<div class="container-fluid">
-			<form method="post" id="submitForm">
+			<form method="post" id="submitForm" enctype="multipart/form-data">
 				<fieldset>
 					<div class="form-group">
 						<label for="category" class="form-label mt-4">카테고리</label>
@@ -46,7 +47,8 @@
 					</div>
 					<div class="form-group">
 						<label for="contents" class="form-label mt-4">내용</label>
-						<textarea id="contents" name="contents" rows="20" style="width: 100%"></textarea>
+						<textarea name="contents" class="form-control" id="contents" rows="6"></textarea>
+					
 					</div>
 					
 					<div class="form-group">
@@ -72,15 +74,15 @@
 				</div>
 			</form>
 		</div>
-		<script type="text/javascript" src="/res/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-		<script type="text/javascript">
-			var oEditors = [];
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef: oEditors,
-				elPlaceHolder: "contents",
-				sSkinURI: "/res/se2/SmartEditor2Skin.html",
-				fCreator: "createSEditor2",
-			});
+		
+		<script>
+			let ckeditor_config = {
+				width: '100%',
+				height: '400px',
+				filebrowserUploadUrl: "/imageupload",
+			};
+			
+			CKEDITOR.replace("contents", ckeditor_config);
 		</script>
 	</th:block>
 

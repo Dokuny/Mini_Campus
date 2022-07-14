@@ -37,4 +37,5 @@ public class TakeCourseSearchCondition {
         }
         return builder.build();
     }
+
 }

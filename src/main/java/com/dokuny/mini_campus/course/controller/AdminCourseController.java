@@ -4,6 +4,7 @@ package com.dokuny.mini_campus.course.controller;
 import com.dokuny.mini_campus.admin.service.CategoryService;
 import com.dokuny.mini_campus.commons.dto.Pagination;
 import com.dokuny.mini_campus.commons.dto.SearchInput;
+import com.dokuny.mini_campus.commons.service.FileUploadService;
 import com.dokuny.mini_campus.course.dto.CourseInput;
 
 import com.dokuny.mini_campus.course.dto.CourseDto;
@@ -11,6 +12,7 @@ import com.dokuny.mini_campus.course.dto.CourseListDto;
 import com.dokuny.mini_campus.course.service.CourseService;
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,15 +23,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class AdminCourseController {
 
     private final CourseService courseService;
     private final CategoryService categoryService;
+    private final FileUploadService fileUploadService;
 
     @GetMapping({"/admin/course/list.do"})
     public String list(Model model, SearchInput input,
