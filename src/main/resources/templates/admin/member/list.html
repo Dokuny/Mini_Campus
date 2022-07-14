@@ -39,6 +39,7 @@
 						<th scope="col">이름</th>
 						<th scope="col">연락처</th>
 						<th scope="col">가입일</th>
+						<th scope="col">마지막 로그인 일시</th>
 						<th scope="col">권한</th>
 					</tr>
 				</thead>
@@ -49,6 +50,7 @@
 						<td th:text="${member.name}">이름</td>
 						<td th:text="${member.phone}">연락처</td>
 						<td th:text="${member.registeredAt}">가입일</td>
+						<td th:text="${member.lastLoginAt}">마지막 로그인 일시</td>
 						<td th:text="${member.role}">권한</td>
 					</tr>
 				</tbody>

@@ -25,6 +25,8 @@ public class MemberListDto {
 
     private Role role;
 
+    private LocalDateTime lastLoginAt;
+
 
 
     public static MemberListDto fromMember(Member member) {
