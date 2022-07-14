@@ -1,4 +1,4 @@
-package com.dokuny.mini_campus.commons.exception;
+package com.dokuny.mini_campus.commons.handler;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

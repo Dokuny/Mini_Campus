@@ -1,4 +1,4 @@
-package com.dokuny.mini_campus.commons.exception;
+package com.dokuny.mini_campus.commons.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;

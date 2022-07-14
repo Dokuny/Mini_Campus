@@ -1,8 +1,13 @@
 package com.dokuny.mini_campus.commons.config;
 
 
-import com.dokuny.mini_campus.commons.exception.CustomAccessDeniedHandler;
-import com.dokuny.mini_campus.commons.exception.MemberAuthenticationFailureHandler;
+import com.dokuny.mini_campus.commons.handler.CustomAccessDeniedHandler;
+import com.dokuny.mini_campus.commons.handler.MemberAuthenticationFailureHandler;
+import com.dokuny.mini_campus.commons.handler.MemberAuthenticationSuccessHandler;
+import com.dokuny.mini_campus.member.entity.LoginHistory;
+import com.dokuny.mini_campus.member.repository.LoginHistoryRepository;
+import com.dokuny.mini_campus.member.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,10 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.beans.BeanProperty;
 
 @EnableWebSecurity
 public class SecurityConfig {
@@ -37,7 +40,10 @@ public class SecurityConfig {
 
         http.formLogin()
                 .loginPage("/member/login")
+                .successHandler(getSuccessHandler())
                 .failureHandler(getFailureHandler());
+
+
 
         http.exceptionHandling()
                         .accessDeniedHandler(getAccessDeniedHandler());
@@ -63,6 +69,12 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationSuccessHandler getSuccessHandler() {
+        return new MemberAuthenticationSuccessHandler();
+    }
+
+
+    @Bean
     public AccessDeniedHandler getAccessDeniedHandler() {
         return new CustomAccessDeniedHandler();
     }
@@ -71,4 +83,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
 }

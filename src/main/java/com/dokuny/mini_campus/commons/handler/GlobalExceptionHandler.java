@@ -1,4 +1,4 @@
-package com.dokuny.mini_campus.commons.exception;
+package com.dokuny.mini_campus.commons.handler;
 
 import com.dokuny.mini_campus.member.dto.MemberRegisterRequest;
 import com.dokuny.mini_campus.member.exception.MemberRegisterException;
