@@ -62,8 +62,8 @@ public class AdminBannerController {
 
 
     @PostMapping("/admin/banner/delete.do")
-    public String delete() {
-
+    public String delete(@RequestParam("idList") String idList) {
+        bannerService.remove(idList);
         return "redirect:/admin/banner/list.do";
     }
 

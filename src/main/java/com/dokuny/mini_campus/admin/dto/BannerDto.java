@@ -33,6 +33,12 @@ public class BannerDto {
 
     private LocalDateTime registeredAt;
 
+    public BannerDto(String alterText, String linkUrl, String imgUrl) {
+        this.alterText = alterText;
+        this.linkUrl = linkUrl;
+        this.imgUrl = imgUrl;
+    }
+
     public static BannerDto of(Banner banner) {
 
         return BannerDto.builder()

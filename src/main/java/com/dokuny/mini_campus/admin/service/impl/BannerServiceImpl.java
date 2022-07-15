@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class BannerServiceImpl implements BannerService {
@@ -45,9 +47,9 @@ public class BannerServiceImpl implements BannerService {
 
     @Transactional
     @Override
-    public boolean update(BannerDto dto, MultipartFile file) {
-        if (file != null) {
-            dto.setImgUrl(fileUploadService.uploadImgFile(file));
+    public boolean update(BannerDto dto, MultipartFile img) {
+        if (img.getSize()>0) {
+            dto.setImgUrl(fileUploadService.uploadImgFile(img));
         }
 
         Banner banner = bannerRepository.findById(dto.getId())
@@ -96,5 +98,10 @@ public class BannerServiceImpl implements BannerService {
                         .findById(id)
                         .orElseThrow(() -> new BannerNotExistException("존재하지 않는 배너입니다."));
         return BannerDto.of(banner);
+    }
+
+    @Override
+    public List<BannerDto> front() {
+        return bannerRepository.getFrontBanners();
     }
 }

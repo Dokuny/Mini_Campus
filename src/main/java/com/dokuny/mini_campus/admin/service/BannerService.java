@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public interface BannerService {
 
     boolean add(BannerAddInput input);
@@ -18,6 +20,8 @@ public interface BannerService {
     Page<BannerDto> list(SearchInput input, Pageable pageable);
 
     BannerDto detail(Long id);
+
+    List<BannerDto> front();
 
 
 
