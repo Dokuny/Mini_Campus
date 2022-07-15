@@ -33,7 +33,6 @@ public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
     private final CategoryRepository categoryRepository;
-    private final FileUploadService fileUploadService;
 
     @Transactional
     @Override

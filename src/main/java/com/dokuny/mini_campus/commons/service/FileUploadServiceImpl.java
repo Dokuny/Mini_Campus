@@ -3,6 +3,7 @@ package com.dokuny.mini_campus.commons.service;
 import com.dokuny.mini_campus.commons.entity.FileUpload;
 import com.dokuny.mini_campus.commons.repository.FileUploadRepository;
 import com.dokuny.mini_campus.commons.utils.FileTimePath;
+import com.dokuny.mini_campus.course.exception.FileInvalidException;
 import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,8 +36,22 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Transactional
     @Override
     public JsonObject uploadEditorImg(MultipartFile file) {
+        String urlPath = uploadImgFile(file);
+
+        JsonObject json = new JsonObject();
+
+        json.addProperty("uploaded",1);
+        json.addProperty("fileName",file.getOriginalFilename());
+        json.addProperty("url",urlPath);
+        return json;
+    }
+
+    @Transactional
+    @Override
+    public String uploadImgFile(MultipartFile file) {
         if (!checkImageFile(file)) {
             log.error("정상적인 이미지 파일이 아닙니다.");
+            throw new FileInvalidException("정상적인 이미지 파일이 아닙니다.");
         }
 
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
@@ -54,13 +69,9 @@ public class FileUploadServiceImpl implements FileUploadService {
                 .localPath(localPath.toString())
                 .build());
 
-        JsonObject json = new JsonObject();
-
-        json.addProperty("uploaded",1);
-        json.addProperty("fileName",file.getOriginalFilename());
-        json.addProperty("url",getUrlPath(saveFileName));
-        return json;
+        return getUrlPath(saveFileName);
     }
+
 
     private boolean checkImageFile(MultipartFile file) {
         if (file != null) { // 파일 null 체크

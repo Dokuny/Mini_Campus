@@ -7,4 +7,6 @@ public interface FileUploadService {
 
     JsonObject uploadEditorImg(MultipartFile file);
 
+    String uploadImgFile(MultipartFile file);
+
 }
