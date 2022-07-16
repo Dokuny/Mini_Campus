@@ -33,14 +33,14 @@ public class BannerDto {
 
     private LocalDateTime registeredAt;
 
-    public BannerDto(String alterText, String linkUrl, String imgUrl) {
+    public BannerDto(String alterText, String linkUrl, String imgUrl,BannerTargetStatus target) {
         this.alterText = alterText;
         this.linkUrl = linkUrl;
         this.imgUrl = imgUrl;
+        this.target = target;
     }
 
     public static BannerDto of(Banner banner) {
-
         return BannerDto.builder()
                 .id(banner.getId())
                 .name(banner.getName())

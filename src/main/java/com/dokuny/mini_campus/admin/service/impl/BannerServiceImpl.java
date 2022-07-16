@@ -48,7 +48,7 @@ public class BannerServiceImpl implements BannerService {
     @Transactional
     @Override
     public boolean update(BannerDto dto, MultipartFile img) {
-        if (img.getSize()>0) {
+        if (img.getSize()>0 && !img.isEmpty()) {
             dto.setImgUrl(fileUploadService.uploadImgFile(img));
         }
 

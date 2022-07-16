@@ -13,23 +13,10 @@
 					<div class="collapse navbar-collapse" id="navbarColor02">
 						<ul class="navbar-nav me-auto">
 							<li class="nav-item">
-								<a class="nav-link active" href="#">Home
-									<span class="visually-hidden">(current)</span>
-								</a>
+								<a class="nav-link" th:classappend="${#request.getRequestURI().length() == 1 ?'active':''}" href="/">Home</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/course">강좌목록</a>
-							</li>
-							
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">강의</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">Action</a>
-									<a class="dropdown-item" href="#">Another action</a>
-									<a class="dropdown-item" href="#">Something else here</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Separated link</a>
-								</div>
+								<a class="nav-link" href="/course" th:classappend="${#request.getRequestURI().contains('course')?'active':''}">강좌목록</a>
 							</li>
 						</ul>
 						<div class="d-flex">
@@ -39,8 +26,6 @@
 									<div class="dropdown-menu">
 										<a class="dropdown-item" href="/member/info">내 정보 관리</a>
 										<a class="dropdown-item" href="/member/takecourse">내 수강 목록</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Separated link</a>
 									</div>
 								</li>
 								<li sec:authorize="isAuthenticated()" class="nav-item" >

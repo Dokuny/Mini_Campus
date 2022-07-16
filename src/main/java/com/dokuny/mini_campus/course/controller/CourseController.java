@@ -30,7 +30,7 @@ public class CourseController {
         Page<CourseDto> list = courseService.frontList(input, pageable);
         model.addAttribute("list",list);
         model.addAttribute("categories",categories);
-        return "course/index";
+        return "course/list";
     }
 
     @GetMapping("/course/{id}")
