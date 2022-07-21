@@ -90,24 +90,16 @@
 						</svg>
 						<div class="card-body">
 							<h5 class="card-title" th:text="${course.subject}">강의명</h5>
-							<h6 class="card-subtitle text-muted">강의자</h6>
 						</div>
 						<div class="card-body">
 							<p class="card-text" th:text="${course.summary}">요약 정보</p>
 						</div>
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item">
-								<span class="price" th:text="${course.price}">가격</span> <span
-								th:text="${course.salePrice}">가격</span>
+								<span class="price" th:text="'정가 : ' + ${course.price}">가격</span> <span
+								th:text="'할인가격 : ' + ${course.salePrice}">가격</span>
 							</li>
 						</ul>
-						<div class="card-body">
-							<a href="#" class="card-link">태그</a>
-							<a href="#" class="card-link">태그</a>
-						</div>
-						<div class="card-footer text-muted">
-							2 days ago
-						</div>
 					</div>
 				</main>
 			</div>

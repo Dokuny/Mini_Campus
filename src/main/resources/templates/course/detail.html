@@ -46,24 +46,17 @@
 		<div class="container-fluid">
 			<div class="card mb-3">
 				<h3 class="card-header" th:text="${course.subject}">Card header</h3>
-				<div class="card-body">
-					<h6 class="card-subtitle text-muted">강의자</h6>
-				</div>
 				
 				<div class="card-body" th:utext="${course.contents}">
 				
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item">Cras justo odio</li>
-					<li class="list-group-item">Dapibus ac facilisis in</li>
-					<li class="list-group-item">Vestibulum at eros</li>
+					<li class="list-group-item" th:text="'정가 : '+ ${course.price}">정가</li>
+					<li class="list-group-item" th:text="'할인가격 : '+ ${course.salePrice}">할인 가격</li>
 				</ul>
 				<div class="card-body" sec:authorize="isAuthenticated()">
 					<input type="hidden" id="courseId" name="courseId" th:value="${course.id}">
 					<button type="submit" class="btn btn-success submitBtn">수강신청</button>
-				</div>
-				<div class="card-footer text-muted">
-					2 days ago
 				</div>
 			</div>
 		

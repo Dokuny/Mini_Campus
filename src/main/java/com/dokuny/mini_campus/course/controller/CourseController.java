@@ -34,7 +34,7 @@ public class CourseController {
     }
 
     @GetMapping("/course/{id}")
-    public String course(Model model, @PathVariable("id") Long id) {
+    public String courseDetail(Model model, @PathVariable("id") Long id) {
 
         CourseDto courseDto = courseService.find(id);
 
