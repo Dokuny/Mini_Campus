@@ -36,4 +36,4 @@
 
 [시연 영상](https://dokuny.notion.site/LMS-ea15be7f606b4ef89b79d5942abb2ea4)은 이곳에서 확인 가능합니다.
 
-자세한 내용은 [노션](https://www.notion.so/dokuny/LMS-ea15be7f606b4ef89b79d5942abb2ea4)을 통해 확인 가능합니다.
+자세한 내용은 [노션](https://dokuny.notion.site/LMS-ea15be7f606b4ef89b79d5942abb2ea4)을 통해 확인 가능합니다.
